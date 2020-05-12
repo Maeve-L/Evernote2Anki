@@ -119,6 +119,10 @@ def getQAFromMarkdown(md, level):
         math_l = math_all.findall(AField)
         AField = math_inline.sub('⚐', AField)
         AField = math_block.sub('\n\n⚐\n\n', AField)
+        # 将下划线转换为cloze填空
+        AField = AField.replace('<u>','{{c1::')#
+        AField = AField.replace('</u>','}}')#
+        # 这样原有的下划线格式就没有了
         AField = markdown.markdown(AField)
         # 回代数学
         AField_l = math_flag.split(AField)
